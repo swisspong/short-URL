@@ -1,16 +1,54 @@
 version: '3'
 services:
-  web:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./frontend:/usr/src/app
-      - /usr/src/app/node_modules
-    environment:
-      - NODE_ENV=development
+  # auth:
+  #   container_name: auth-service
+  #   restart: always
+  #   build:
+  #     context: ./backend
+  #     dockerfile: ./apps/auth/Dockerfile
+  #     target: development
+  #   command: npm run start:dev auth
+  #   ports:
+  #     - '8000:8000'
+  #   env_file:
+  #     - ./backend/apps/auth/.env
+  #   environment:
+  #     DATABASE_URL: mysql://root:root@db_auth:3306/short_url
+  #   depends_on:
+  #     - db_auth
+  #   volumes:
+  #     - ./backend:/usr/src/app
+  #     - /usr/src/app/node_modules
+  # short_url:
+  #   container_name: short_url-service
+  #   restart: always
+  #   build:
+  #     context: ./backend
+  #     dockerfile: ./apps/short_url/Dockerfile
+  #     target: development
+  #   command: npm run start:dev short_url
+  #   ports:
+  #     - '8001:8001'
+  #   env_file:
+  #     - ./backend/apps/short_url/.env
+  #   environment:
+  #     DATABASE_URL: mysql://root:root@db_auth:3307/short_url
+  #   depends_on:
+  #     - db_short_url
+  #   volumes:
+  #     - ./backend:/usr/src/app
+  #     - /usr/src/app/node_modules
+  # web:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8080:8080"
+  #   volumes:
+  #     - ./frontend:/usr/src/app
+  #     - /usr/src/app/node_modules
+  #   environment:
+  #     - NODE_ENV=development
   db_auth:
     image: mysql
     container_name: db_auth
@@ -33,3 +71,13 @@ services:
       - "3307:3306"
     volumes:
       - ./data/mysql-2:/var/lib/mysql
+
+  # nginx-proxy:
+  #   build:
+  #     dockerfile: Dockerfile
+  #     context: ./proxy
+  #   depends_on:
+  #     - auth
+  #     - web
+  #   ports:
+  #     - 80:80
