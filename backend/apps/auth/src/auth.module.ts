@@ -1,17 +1,34 @@
 import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { PrismaModule } from './database/prisma.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { HashUtilsModule, JwtUtilsModule, OrmConfigModule } from '@app/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Users } from './entities/users.entity';
+import { authProviders } from '@app/common/providers';
+import { JwtStrategy } from '@app/common/strategy';
+import { UsersModule } from './users/users.module';
+
+
+
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true
+      isGlobal: true,
+      envFilePath: './apps/auth/.env',
     }),
-    PrismaModule
+    TypeOrmModule.forFeature([Users]),
+    OrmConfigModule,
+    HashUtilsModule,
+    JwtUtilsModule,
+    UsersModule
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [
+    ...authProviders,
+    JwtStrategy,
+    AuthService
+  ],
 })
 export class AuthModule { }
