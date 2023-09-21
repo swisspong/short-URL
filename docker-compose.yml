@@ -11,3 +11,25 @@ services:
       - /usr/src/app/node_modules
     environment:
       - NODE_ENV=development
+  db_auth:
+    image: mysql
+    container_name: db_auth
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: short_url
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/mysql-1:/var/lib/mysql
+  db_short_url:
+    image: mysql
+    container_name: db_short_url
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: short_url
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./data/mysql-2:/var/lib/mysql
