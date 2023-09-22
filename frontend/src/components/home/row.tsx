@@ -1,12 +1,6 @@
 import React, { FC } from "react";
 import QRCode from "react-qr-code";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
+
 import { Link } from "react-router-dom";
 import { UrlItem, deleteUrl } from "@/services/url.service";
 import {

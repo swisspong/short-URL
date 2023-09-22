@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 // import './App.css'
 import gafield from "/rolling-cat-cat-rolling.gif";
-import { Button } from "./components/ui/button";
 import Signin from "./pages/signin/Signin";
 import Home from "./pages/home/Home";
 import Signup from "./pages/signup/Signup";
