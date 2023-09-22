@@ -16,33 +16,72 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import React from "react";
-import Row from "../row";
+import React, { useEffect, useState } from "react";
+// import Row from "../row";
 import { useNavigate } from "react-router-dom";
+import { UrlItem, getUrls } from "@/services/url.service";
+import UrlFormCard from "./url-form-card";
+import { Row } from "../row";
+import { Loader2 } from "lucide-react";
 
 const UrlForm = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const [edit, setEdit] = useState<string>();
+  // const [del, setDel] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [isFetch, setFetch] = useState<boolean>(true);
+  const [urls, setUrls] = useState<UrlItem[]>([]);
+  useEffect(() => {
+    const getUrlsReq = async () => {
+      if (isFetch) {
+        const result = await getUrls();
+        setUrls(result.data);
+        setFetch(false);
+      }
+    };
+    getUrlsReq();
+  }, [isFetch]);
   return (
-    <Card>
+    <Card className="p-0 m-0">
       <CardHeader>
-        <CardTitle>Share this document</CardTitle>
-        <CardDescription>
-          Anyone with the link can view this document.
-        </CardDescription>
+        <CardTitle>Share this url</CardTitle>
+        <CardDescription>Anyone can access your link.</CardDescription>
       </CardHeader>
-      <CardContent>
-        <div className="flex space-x-2">
-          <Input value="http://example.com/link/to/document" readOnly />
-          <Button variant="secondary" className="shrink-0">
-            Add Link
-          </Button>
-        </div>
+      <CardContent className="p-2 md:p-6">
+        <UrlFormCard
+          setFetch={setFetch}
+          edit={edit}
+          setEdit={setEdit}
+          urls={urls}
+          setLoading={setLoading}
+          loading={loading}
+        />
         <Separator className="my-4" />
         <div className="space-y-4">
-          <h4 className="text-sm font-medium">People with access</h4>
-          <div className="grid gap-6 grid-cols-2">
-            <Row />
-            <div className="flex items-center justify-between space-x-4">
+          <h4 className="text-sm font-medium">Shortener Urls</h4>
+          <div
+            className={`grid gap-6 md:grid-cols-2 relative ${
+              loading || isFetch ? "pb-5" : undefined
+            }`}
+          >
+            {loading || isFetch ? (
+              <div className="absolute inset-0 flex justify-center">
+                <Loader2 className="animate-spin" />
+              </div>
+            ) : (
+              urls.map((url) => (
+                <Row
+                  key={url.id}
+                  data={url}
+                  setEdit={setEdit}
+                  edit={edit}
+                  setLoading={setLoading}
+                  setFetch={setFetch}
+                />
+              ))
+            )}
+
+            {/* <div className="flex items-center justify-between space-x-4">
               <div className="flex items-center space-x-4">
                 <Avatar>
                   <AvatarImage src="/avatars/03.png" />
@@ -110,7 +149,7 @@ const UrlForm = () => {
                   <SelectItem value="view">Can view</SelectItem>
                 </SelectContent>
               </Select>
-            </div>
+            </div> */}
           </div>
         </div>
       </CardContent>

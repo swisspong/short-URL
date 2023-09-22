@@ -13,7 +13,7 @@ export class Urls {
     id: string;
     @Column({ type: 'varchar' })
     user_id: string;
-    @Column({ type: 'varchar', unique: true })
+    @Column({ type: 'varchar' })
     url: string;
     @Column({ type: 'varchar' })
     short_url: string;

@@ -18,9 +18,13 @@ export class AuthService {
     private readonly hashUtilsService: HashUtilsService,
     private readonly jwtUtilsService: JwtUtilsService,
   ) { }
+  async hello() {
+    return 'hellow'
+  }
   async signinLocal(signinLocalDto: SigninLocalDto, res: Response) {
     try {
       const user = await this.userRepository.findOne({ where: { email: signinLocalDto.email } })
+      console.log(user)
       if (!user) throw new NotFoundException('Account not found.');
       if (!await this.hashUtilsService.comparePassword(signinLocalDto.password, user.password))
         throw new BadRequestException('Password not match.');
@@ -30,17 +34,20 @@ export class AuthService {
         // secure: true, 
         httpOnly: false,
         // sameSite: 'none',
-        domain: 'example.com'
+        // domain: 'example.com'
       })
-      console.log(res)
-      return { accessToken }
+      // console.log(res)
+      // return { accessToken }
+      res.json({ accessToken })
     } catch (error) {
+      console.log(error)
       throw error
     }
 
   }
-  async signupLocal(signupLocalDto: SignupLocalDto, res: any) {
+  async signupLocal(signupLocalDto: SignupLocalDto, res: Response) {
     try {
+      console.log(signupLocalDto)
       const user = await this.userRepository.findOne({ where: { email: signupLocalDto.email } })
 
       if (user) throw new BadRequestException('Email is already exist.');
@@ -59,20 +66,23 @@ export class AuthService {
 
       const accessToken = await this.jwtUtilsService.signToken({ sub: newUser.id })
 
-      // res.cookie("token", accessToken)
-      res.cookie("token", accessToken, {
-        // secure: true, 
-        httpOnly: false,
-        // sameSite: 'none',
-        domain: 'example.com'
-      })
-      return { accessToken }
+      res.cookie("token", accessToken)
+      res.json({ accessToken })
+      // res.cookie("token", accessToken, {
+      //   // secure: true, 
+      //   httpOnly: false,
+      //   // sameSite: 'none',
+      //   // domain: 'example.com'
+      // })
+
+      // return { accessToken }
 
     } catch (error) {
       throw error
     }
   }
   async signout(res: any) {
-    res.clearCookie("token", { domain: 'example.com' })
+    res.clearCookie("token", {})
+    res.json({})
   }
 }

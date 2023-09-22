@@ -4,7 +4,7 @@ import { GetUserId, Public } from '@app/common/decorators';
 import { Request, Response } from 'express';
 import { UrlPayloadDto } from './dto/url-payload.dto';
 
-@Controller()
+@Controller("url")
 export class ShortUrlController {
   constructor(private readonly shortUrlService: ShortUrlService) { }
 
@@ -23,11 +23,11 @@ export class ShortUrlController {
 
   }
   @Patch(':urlId')
-  updateUrl(@Req() req: Request, @GetUserId() userId: string, @Body() payload: UrlPayloadDto, @Param('urlId') urlId: string) {
+  updateUrl(@GetUserId() userId: string, @Body() payload: UrlPayloadDto, @Param('urlId') urlId: string) {
     return this.shortUrlService.updateUrl(userId, urlId, payload)
   }
   @Delete(':urlId')
-  deleteUrl(@Req() req: Request, @GetUserId() userId: string, @Param('urlId') urlId: string) {
+  deleteUrl(@GetUserId() userId: string, @Param('urlId') urlId: string) {
     return this.shortUrlService.deleteUrl(userId, urlId)
   }
 }

@@ -18,8 +18,8 @@ import { UsersModule } from './users/users.module';
       isGlobal: true,
       envFilePath: './apps/auth/.env',
     }),
-    TypeOrmModule.forFeature([Users]),
     OrmConfigModule,
+    TypeOrmModule.forFeature([Users]),
     HashUtilsModule,
     JwtUtilsModule,
     UsersModule

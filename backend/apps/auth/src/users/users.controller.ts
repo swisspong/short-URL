@@ -2,7 +2,7 @@ import { Controller, Get, } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { GetUserId } from '@app/common/decorators';
 
-@Controller('users')
+@Controller('user')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {
 

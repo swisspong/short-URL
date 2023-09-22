@@ -20,7 +20,8 @@ export class ShortUrlService {
     await this.urlsRepository.save({
       id: `url_${this.uid.stamp(13)}`,
       url,
-      short_url: `${req.protocol}://${req.get('Host')}/${this.uid.stamp(10)}`,
+      // short_url: `${req.protocol}://${req.get('Host')}/api/url/${this.uid.stamp(10)}`,
+      short_url: `${this.uid.stamp(10)}`,
       user_id: userId
     })
     return {
@@ -55,8 +56,10 @@ export class ShortUrlService {
     }
   }
   async redirect(url: string, res: Response) {
+    console.log(url)
     const existUrl = await this.urlsRepository.findOne({ where: { short_url: url } })
-    res.redirect(existUrl.short_url)
+    console.log("fdsfds",existUrl)
+    res.redirect(existUrl.url)
     return
   }
 

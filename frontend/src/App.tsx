@@ -28,7 +28,6 @@ function App() {
           <div className="h-screen w-screen rounded-lg p-8 flex justify-center items-center">
             <div className="flex flex-col items-center justify-center">
               <img
-
                 src={gafield}
                 className="object-contain animate-bounce max-h-11"
                 alt="Vite logo"
@@ -40,12 +39,13 @@ function App() {
           </div>
         ) : (
           <>
-            <ModeToggle />
             <Router>
               <Routes>
-                <Route path="/signin" element={<Signin />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/" element={<Home />} />
+                <Route element={<ModeToggle />}>
+                  <Route path="/signin" element={<Signin />} />
+                  <Route path="/signup" element={<Signup />} />
+                  <Route path="/" element={<Home />} />
+                </Route>
               </Routes>
             </Router>
           </>

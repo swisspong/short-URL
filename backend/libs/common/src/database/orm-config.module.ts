@@ -7,9 +7,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule], // Import the ConfigModule to use ConfigService
       useFactory: (configService: ConfigService) => {
-        console.log(__dirname + '/../../../../**/*.entity{.ts,.js}')
+        console.log(__dirname + '/../../../../**/*.entity{.ts,.js}',configService.get('DATABASE_HOST'),configService.get('DATABASE_USERNAME'),configService.get('DATABASE_PASSWORD'),configService.get('DATABASE_NAME'),configService.get<number>('DATABASE_PORT'))
         return {
-
           type: 'mysql',
           host: configService.get('DATABASE_HOST'), // Use config values
           port: Number(configService.get<number>('DATABASE_PORT')),
@@ -17,7 +16,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
           password: configService.get('DATABASE_PASSWORD'),
           database: configService.get('DATABASE_NAME'),
           entities: [__dirname + '/../../../../**/*.entity{.ts,.js}'],
-          logging:true,
+       //   logging:true,
           synchronize: true,
         }
       },

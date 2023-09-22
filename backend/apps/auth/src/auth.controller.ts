@@ -5,22 +5,30 @@ import { Response } from 'express';
 import { SignupLocalDto } from './dto/signup-local.dto';
 import { Public } from '@app/common/decorators';
 
-@Public()
+
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
-
+  @Public()
+  @Get()
+  hello() {
+    return this.authService.hello()
+  }
+  @Public()
   @Post('signin')
   signin(@Body() payload: SigninLocalDto, @Res() res: Response) {
-    this.authService.signinLocal(payload, res)
+    console.log(payload)
+    return this.authService.signinLocal(payload, res)
   }
+  @Public()
   @Post('signup')
   signup(@Body() payload: SignupLocalDto, @Res() res: Response) {
-    this.authService.signupLocal(payload, res)
+    return this.authService.signupLocal(payload, res)
   }
+  @Public()
   @Post('signout')
   signout(@Res() res: Response) {
-    this.authService.signout(res)
+    return this.authService.signout(res)
   }
 
 }

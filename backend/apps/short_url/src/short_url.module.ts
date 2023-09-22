@@ -12,10 +12,12 @@ import { JwtStrategy } from '@app/common/strategy';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true
+      isGlobal: true,
+      envFilePath: './apps/short_url/.env',
     }),
     OrmConfigModule,
     TypeOrmModule.forFeature([Urls])
+
   ],
   controllers: [ShortUrlController],
   providers: [
