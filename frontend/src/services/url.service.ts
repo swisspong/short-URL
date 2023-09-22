@@ -15,16 +15,16 @@ export interface UrlItem {
 }
 
 export const postUrl = async (body: UrlPayload) => {
-    return API.post('/url', body).then((response) => response.data)
+    return API.post('/short', body).then((response) => response.data)
 }
 export const patchUrl = async (urlId: string, body: UrlPayload) => {
-    return API.patch(`/url/${urlId}`, body).then((response) => response.data)
+    return API.patch(`/short/${urlId}`, body).then((response) => response.data)
 }
 export const deleteUrl = async (urlId: string) => {
-    return API.delete(`/url/${urlId}`).then((response) => response.data)
+    return API.delete(`/short/${urlId}`).then((response) => response.data)
 }
 export const getUrls = async (): Promise<UrlRes> => {
-    return await API.get(`/url`).then(
+    return await API.get(`/short`).then(
         (response) => response.data
     );
 };

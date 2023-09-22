@@ -9,7 +9,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export const API = axios.create({
   // baseURL: 'http://localhost/api',
-  baseURL: '/api',
+  baseURL: '/',
   // baseURL: process.env.NODE_ENV === "production" ? "https://sim24th.com/api/v1" : "http://localhost/api/",
   //baseURL: "http://api:8000/v1",
   // baseURL: "http://localhost:8000/v1",

@@ -28,16 +28,16 @@ export const Row: FC<Props> = ({ data, setLoading, setEdit, setFetch }) => {
           className="rounded-md"
           size={256}
           style={{ height: "60px", maxWidth: "100%", width: "100%" }}
-          value={window.location.href + "api/url/" + data.short_url}
+          value={window.location.href + "short/" + data.short_url}
           viewBox={`0 0 256 256`}
         />
         <div>
-          <Link to={data.url}>
+          <Link to={data.url} target="_blank">
             <p className="text-xs sm:text-sm font-medium leading-none">{data.url}</p>
           </Link>
-          <Link to={"api/url/" + data.short_url} target="_blank">
+          <Link to={"short/" + data.short_url} target="_blank">
             <p className="text-xs sm:text-sm text-muted-foreground">
-              {window.location.href + "api/url/" + data.short_url}
+              {window.location.href + "short/" + data.short_url}
             </p>
           </Link>
         </div>
@@ -54,7 +54,7 @@ export const Row: FC<Props> = ({ data, setLoading, setEdit, setFetch }) => {
           <DropdownMenuItem
             onClick={() =>
               navigator.clipboard.writeText(
-                window.location.href + "api/url/" + data.short_url
+                window.location.href + "short/" + data.short_url
               )
             }
           >
