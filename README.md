@@ -5,8 +5,28 @@
 ```
 git clone https://github.com/swisspong/short-URL.git
 ```
-## Second step
-
+## Second step crate .env file
+create .env file in `./backend/apps/auth`
+```
+DATABASE_HOST="localhost"
+DATABASE_PORT=3306
+DATABASE_USERNAME="root"
+DATABASE_PASSWORD="root"
+DATABASE_NAME="short_url"
+PORT=8000
+JWT_SECRET="fdlaskfjdlasfjlsadfdasfdasdfkjasfd"
+```
+create .env file in `./backend/apps/short_url`
+```
+DATABASE_HOST="localhost"
+DATABASE_PORT=3306
+DATABASE_USERNAME='root'
+DATABASE_PASSWORD='root'
+DATABASE_NAME="short_url"
+PORT=8001
+JWT_SECRET="fdlaskfjdlasfjlsadfdasfdasdfkjasfd"
+```
+## Third step start project
 ```
 cd short-URL
 docker compose up -d
