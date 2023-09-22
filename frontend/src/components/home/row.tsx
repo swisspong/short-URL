@@ -66,7 +66,7 @@ export const Row: FC<Props> = ({ data, setLoading, setEdit, setFetch }) => {
           <DropdownMenuItem
             onClick={() =>
               navigator.clipboard.writeText(
-                 data.url
+                 data.url.toString()
               )
             }
           >

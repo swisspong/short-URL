@@ -31,6 +31,11 @@ JWT_SECRET="fdlaskfjdlasfjlsadfdasfdasdfkjasfd"
 cd short-URL
 docker compose up -d
 ```
+## Email and password for test
+```
+email: test@gmail.com
+password: test
+```
 ## Micorservice Architecture
 
 ![This is an alt text.](/architecture.png)
