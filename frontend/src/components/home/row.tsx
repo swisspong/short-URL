@@ -40,6 +40,9 @@ export const Row: FC<Props> = ({ data, setLoading, setEdit, setFetch }) => {
               {window.location.href + "short/" + data.short_url}
             </p>
           </Link>
+          <p className="text-xs sm:text-sm text-muted-foreground">
+              count: {data.click}
+            </p>
         </div>
       </div>
       <DropdownMenu>

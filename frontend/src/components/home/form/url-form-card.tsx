@@ -65,7 +65,7 @@ const UrlFormCard: FC<Props> = ({
     <Form {...form}>
       <form className="" onSubmit={form.handleSubmit(onSubmit)}>
         {/* <div className="grid"> */}
-        <div className="flex flex-col space-y-2 sm:flex-row sm:space-x-3">
+        <div className="flex flex-col space-y-2 sm:flex-row sm:space-x-3 sm:space-y-0">
           <FormField
             control={form.control}
             name="url"

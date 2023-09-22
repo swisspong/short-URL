@@ -12,6 +12,7 @@ export interface UrlItem {
     short_url: string;
     url: string;
     user_id: string;
+    click: number;
 }
 
 export const postUrl = async (body: UrlPayload) => {

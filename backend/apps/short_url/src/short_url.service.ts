@@ -58,7 +58,11 @@ export class ShortUrlService {
   async redirect(url: string, res: Response) {
     console.log(url)
     const existUrl = await this.urlsRepository.findOne({ where: { short_url: url } })
-    console.log("fdsfds",existUrl)
+    if (existUrl) {
+      existUrl.click++;
+      await this.urlsRepository.save(existUrl)
+    }
+    console.log("fdsfds", existUrl)
     res.redirect(existUrl.url)
     return
   }
