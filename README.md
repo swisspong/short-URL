@@ -5,7 +5,7 @@
 ```
 git clone https://github.com/swisspong/short-URL.git
 ```
-## Second step crate .env file
+## Second step create .env file
 create .env file in `./backend/apps/auth`
 ```
 DATABASE_HOST="localhost"
