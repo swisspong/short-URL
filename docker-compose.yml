@@ -88,6 +88,7 @@ services:
     depends_on:
       - auth
       - web
+      
       - short-url
     ports:
       - 80:80
