@@ -35,6 +35,7 @@ services:
       - ./backend/apps/short_url/.env
     environment:
       DATABASE_HOST: db_url
+      DATABASE_PORT: 3306
     depends_on:
       - db_url
     volumes:
@@ -62,12 +63,10 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: short_url
-    # ports:
-    #   - "3306:3306"
     volumes:
       - ./data/mysql-1:/var/lib/mysql
-    # networks:
-    #   - my_network
+    ports:
+      - "3306:3306"
   db_url:
     image: mysql
     container_name: db_url
@@ -75,12 +74,10 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: short_url
-    # ports:
-    #   - "3307"
     volumes:
       - ./data/mysql-2:/var/lib/mysql
-    # networks:
-    #   - my_network
+    ports:
+      - "3307:3306" 
   nginx-proxy:
     build:
       dockerfile: Dockerfile

@@ -16,21 +16,21 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  // build: {
-  //   // Specify the output directory for the production build
-  //   outDir: 'dist',
+  build: {
+    // Specify the output directory for the production build
+    outDir: 'dist',
 
-  //   // Enable minification for production
-  //   // minify: 'terser',
+    // Enable minification for production
+    // minify: 'terser',
 
-  //   // Enable CSS extraction for better performance
-  //   cssCodeSplit: true,
+    // Enable CSS extraction for better performance
+    cssCodeSplit: true,
 
-  //   // Add any other production-specific optimizations here
-  //   // For example, you can configure asset hashing:
-  //   // assetDir: 'assets',
-  //   // assetsInlineLimit: 4096,
-  // },
+    // Add any other production-specific optimizations here
+    // For example, you can configure asset hashing:
+    // assetDir: 'assets',
+    // assetsInlineLimit: 4096,
+  },
   server: {
     host: true,
     port: 8080
