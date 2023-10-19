@@ -58,6 +58,7 @@ services:
     #   - my_network
   db_auth:
     image: mysql
+    restart: always
     container_name: db_auth
     command: --default-authentication-plugin=mysql_native_password
     environment:
@@ -70,6 +71,7 @@ services:
   db_url:
     image: mysql
     container_name: db_url
+    restart: always
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -89,6 +91,14 @@ services:
       - short-url
     ports:
       - 80:80
+  # uptime-kuma:
+  #   image: louislam/uptime-kuma:1
+  #   container_name: kuma
+  #   volumes:
+  #     - ./data/uptime:/app/data
+  #   restart: always
+  #   ports:
+  #     - 3001:3001  # <Host Port>:<Container Port>
     # networks:
     #   - my_network
 # networks:
