@@ -14,6 +14,7 @@ services:
       - ./backend/apps/auth/.env
     environment:
       DATABASE_HOST: db_auth
+      DATABASE_PORT: 3306
     depends_on:
       - db_auth
     volumes:
@@ -54,12 +55,15 @@ services:
       - /usr/src/app/node_modules
     environment:
       - NODE_ENV=development
+    depends_on:
+      - short-url
+      - auth
     # networks:
     #   - my_network
   db_auth:
     image: mysql
-    restart: always
     container_name: db_auth
+    restart: always
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: root
